@@ -63,6 +63,11 @@ window.onload = function() {
     ],
   };
 
+  var interval;
+  var wins = 0;
+  var losses = 0;
+  var canClick = true;
+
   var gameObj = {
     //gets set when getQuestionChoices is invoked
     randomQuestion: undefined,
@@ -70,7 +75,7 @@ window.onload = function() {
     //will store an array of objects. The key is the choice. The value is true or false based on the answer to randomQuestion
     questionChoices: undefined,
     correctChoice: undefined,
-    time: 10,
+    time: 5,
     clockRunning: true,
 
     //gets our random question, and its choices
@@ -90,11 +95,21 @@ window.onload = function() {
     },
 
     //Starts the game. displays our choices. Also used to restart the game.
-    displayQuestion: function() {
+    start: function() {
       this.getQuestionChoices();
+
+      //allows the click event to run at the start of a new round.
+      canClick = true;
 
       //updates .game-content__h3 with the question
       $('.game__h3').text(this.randomQuestion);
+
+      //sets time for the round
+      this.time = 5;
+      $('.game__h5').text(`Time Remaining: ${this.time}`);
+
+      //starts our timer for the round
+      this.startTimer();
 
       //displays choices to the screen
       for (i = 0; i < 4; i++) {
@@ -117,28 +132,51 @@ window.onload = function() {
       }
     },
 
+    //subtracts from our total time and updates .game__h5 with the time
     decrement: function() {
-      gameObj.time--;
-      $('.game__h5').text(`Time Remaining: ${gameObj.time}`);
+
+      //only updates if greater than 0
+      if (this.time > 0) {
+        gameObj.time--;
+        $('.game__h5').text(`Time Remaining: ${gameObj.time}`);
+      }
+
+      //if time is out, then a new game begins automatically and clears our interval
+      else {
+        clearInterval(interval);
+        this.start();
+      }
+    },
+
+    //gets invoked in this.start to begin the timer.
+    startTimer: function() {
+      interval = setInterval(gameObj.decrement.bind(gameObj), 1000);
     }
   };
   
-  gameObj.displayQuestion();
-
-  //move to a method of gameObj
-  var timer = setInterval(function() {
-    gameObj.decrement();
-    if (gameObj.time < 0) {
-      clearInterval(timer)
-    }
-  }, 1000);
+  gameObj.start();
 
   //checks if your guess was correct
   $('.game-content__div--style').click(function() {
-    if ($(this).text() === gameObj.correctChoice) { 
-      console.log('Correct!'); 
-    } else { 
-      console.log('Wrong');
+
+    //prevents the click event from running when the setTimout function gets called to start a new round.
+    if (canClick) {
+      canClick = false;
+
+      //clears the current interval for the round.
+      clearInterval(interval);
+
+      //starts a new round after 2 seconds
+      setTimeout(gameObj.start.bind(gameObj), 2000);
+
+      //tracks your wins and losses
+      if ($(this).text() === gameObj.correctChoice) {
+        wins++;
+        $('.game-wins').text(`Wins: ${wins}`);
+      } else {
+        losses++;
+        $('.game-losses').text(`Losses: ${losses}`);
+      }
     }
   });
 
