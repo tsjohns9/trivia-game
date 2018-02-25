@@ -61,7 +61,7 @@ window.onload = function() {
       {q9c3: false},
       {q9c4: false}
     ],
-  }
+  };
 
   var gameObj = {
     //gets set when getQuestionChoices is invoked
@@ -70,6 +70,8 @@ window.onload = function() {
     //will store an array of objects. The key is the choice. The value is true or false based on the answer to randomQuestion
     questionChoices: undefined,
     correctChoice: undefined,
+    time: 10,
+    clockRunning: true,
 
     //gets our random question, and its choices
     getQuestionChoices: function() {
@@ -87,12 +89,12 @@ window.onload = function() {
       this.questionChoices = questionsObj[this.randomQuestion];
     },
 
-    //displays our choices
+    //Starts the game. displays our choices. Also used to restart the game.
     displayQuestion: function() {
       this.getQuestionChoices();
 
       //updates .game-content__h3 with the question
-      $('.game-content__h3').text(this.randomQuestion);
+      $('.game__h3').text(this.randomQuestion);
 
       //displays choices to the screen
       for (i = 0; i < 4; i++) {
@@ -100,28 +102,44 @@ window.onload = function() {
         //each choice is an object. the key is an option to guess, the value is true or false.
         var choiceObj = this.questionChoices[i];
         
-        //the key of choiceObj, which is a potential answer
+        //the key of choiceObj, which is a potential answer. It is stored as an array.
         var choice = Object.keys(choiceObj);
 
         //gets the true or false value of each key from choiceObj
         var potentialAnswer = choiceObj[choice];
 
         //If potential answer is true, then the choice variable is correct. Stores choice in this.correctChoice
-        if (potentialAnswer) { this.correctChoice = choice }
+        if (potentialAnswer) { this.correctChoice = choice[0]; }
 
         //adds choices to the screen
         var children = $('.game-content').children();
-        $(children[i]).text(choice)
-
-        //creates div for each choice
-        // var newDiv = $(`<div>${choice}</div>`)
-
-        //displays each choice
-        // $(newDiv).appendTo('.game-content');
+        $(children[i]).text(choice);
       }
-    }
-  }
+    },
 
+    decrement: function() {
+      gameObj.time--;
+      $('.game__h5').text(`Time Remaining: ${gameObj.time}`);
+    }
+  };
   
   gameObj.displayQuestion();
+
+  //move to a method of gameObj
+  var timer = setInterval(function() {
+    gameObj.decrement();
+    if (gameObj.time < 0) {
+      clearInterval(timer)
+    }
+  }, 1000);
+
+  //checks if your guess was correct
+  $('.game-content__div--style').click(function() {
+    if ($(this).text() === gameObj.correctChoice) { 
+      console.log('Correct!'); 
+    } else { 
+      console.log('Wrong');
+    }
+  });
+
 };
