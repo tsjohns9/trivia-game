@@ -63,10 +63,13 @@ window.onload = function() {
     ],
   };
 
+  //allows/prevents the click event from being used
+  var canClick = true;
+
+  //used to store and clear our interval for each round
   var interval;
   var wins = 0;
   var losses = 0;
-  var canClick = true;
 
   var gameObj = {
     //gets set when getQuestionChoices is invoked
@@ -90,7 +93,7 @@ window.onload = function() {
       //selects a random key (question) from questionsObj based off the random number
       this.randomQuestion = questionsObjKeys[randomNumber];
 
-      //sets all choices for the current question
+      //sets all choices for the current question as an array of objects
       this.questionChoices = questionsObj[this.randomQuestion];
     },
 
@@ -104,7 +107,7 @@ window.onload = function() {
       //updates .game-content__h3 with the question
       $('.game__h3').text(this.randomQuestion);
 
-      //sets time for the round
+      //Used to reset the time on each new round
       this.time = 5;
       $('.game__h5').text(`Time Remaining: ${this.time}`);
 
@@ -130,6 +133,7 @@ window.onload = function() {
         var children = $('.game-content').children();
         $(children[i]).text(choice);
       }
+      
     },
 
     //subtracts from our total time and updates .game__h5 with the time
@@ -137,7 +141,7 @@ window.onload = function() {
 
       //only updates if greater than 0
       if (this.time > 0) {
-        gameObj.time--;
+        this.time--;
         $('.game__h5').text(`Time Remaining: ${gameObj.time}`);
       }
 
@@ -145,6 +149,8 @@ window.onload = function() {
       else {
         clearInterval(interval);
         this.start();
+        losses++;
+        $('.game-score-tracker__div2--style .badge').text(`${losses}`);
       }
     },
 
@@ -159,7 +165,7 @@ window.onload = function() {
   //checks if your guess was correct
   $('.game-content__div--style').click(function() {
 
-    //prevents the click event from running when the setTimout function gets called to start a new round.
+    //prevents the click event from running when the setTimeout function gets called to start a new round.
     if (canClick) {
       canClick = false;
 
@@ -172,10 +178,10 @@ window.onload = function() {
       //tracks your wins and losses
       if ($(this).text() === gameObj.correctChoice) {
         wins++;
-        $('.game-wins').text(`Wins: ${wins}`);
+        $('.game-score-tracker__div1--style .badge').text(`${wins}`);
       } else {
         losses++;
-        $('.game-losses').text(`Losses: ${losses}`);
+        $('.game-score-tracker__div2--style .badge').text(`${losses}`);
       }
     }
   });

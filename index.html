@@ -11,21 +11,28 @@
 <body>
 
   <main class="game container">
-    <h1 class="text-center">Trivia Game</h1>
-    <h3 class="game__h3"></h3>
+    <h1 class="mb-4 text-center">Trivia Game</h1>
+    <h3 class="alert alert-info game__h3 text-center mb-4 mx-auto w-50" role="alert"></h3>
 
-    <section class="game-content">
-      <div class="mb-3 game-content__div--style"></div>
-      <div class="mb-3 game-content__div--style"></div>
-      <div class="mb-3 game-content__div--style"></div>
-      <div class="mb-3 game-content__div--style"></div>
+    <section class="game-content row text-center mb-4">
+      <div class="col-sm-3 game-content__div--style mb-3 mb-sm-0"></div>
+      <div class="col-sm-3 game-content__div--style mb-3 mb-sm-0"></div>
+      <div class="col-sm-3 game-content__div--style mb-3 mb-sm-0"></div>
+      <div class="col-sm-3 game-content__div--style mb-sm-0"></div>
     </section>
 
-    <h5 class="game__h5">Time Remaining: 5</h5>
+    <h5 class="game__h5 text-center mb-4">Time Remaining: 5</h5>
 
-    <section class="game-score-tracker">
-      <p class="game-wins">Wins: 0</p>
-      <p class="game-losses">Losses: 0</p>
+    <section class="game-score-tracker row text-center">
+      <div class="col-sm-6 game-score-tracker__div1--style">
+        <p class="bg-info mx-auto p-2 rounded text-white w-50">Wins <span class="badge badge-light">0</span></p>   
+      </div>
+      <div class="col-sm-6 game-score-tracker__div2--style">
+        <p class="bg-info mx-auto p-2 rounded text-white w-50">Losses <span class="badge badge-light">0</span></p>         
+      </div>
+
+      <!-- <p class="col-sm-6 game-score-tracker__p1">Wins: 0</p>
+      <p class="col-sm-6 game-score-tracker__p2">Losses: 0</p> -->
     </section>
   </main>
 

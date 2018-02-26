@@ -1,3 +1,9 @@
 .game-content__div--style {
   cursor: pointer;
 }
+
+.game-score-tracker__div1--style,
+.game-score-tracker__div2--style {
+  font-size: 20px;
+  letter-spacing: 1px;
+}
