@@ -1,7 +1,7 @@
 window.onload = function() {
 
   var questionsObj = {
-    question0: [
+    "question0": [
       {q0c1: true},
       {q0c2: false},
       {q0c3: false},
@@ -71,6 +71,17 @@ window.onload = function() {
   var wins = 0;
   var losses = 0;
 
+  //hides our modal on click and starts new game
+  $('.close').click(function() {
+    wins = 0;
+    losses = 0;
+    gameObj.start();
+    $('#new-game-modal').modal('hide');
+    $('.game-score-tracker__div1--style .badge').text(`${wins}`);
+    $('.game-score-tracker__div2--style .badge').text(`${losses}`);
+  })
+  
+
   var gameObj = {
     //gets set when getQuestionChoices is invoked
     randomQuestion: undefined,
@@ -78,28 +89,37 @@ window.onload = function() {
     //will store an array of objects. The key is the choice. The value is true or false based on the answer to randomQuestion
     questionChoices: undefined,
     correctChoice: undefined,
-    time: 5,
-    clockRunning: true,
+    remainingQuestions: undefined,
+    time: 1,
+    
+
+    //gets all our questions from questionsObj by collecting all the keys as an array.
+    getRemainingQuestions: function() {
+      this.remainingQuestions = Object.keys(questionsObj);
+    },
 
     //gets our random question, and its choices
     getQuestionChoices: function() {
 
-      //gets all keys (questions) in questionsObj
-      var questionsObjKeys = Object.keys(questionsObj);
+      //gets random number based off how many keys are in this.remainingQuestions
+      var randomNumber = Math.floor(Math.random() * this.remainingQuestions.length);
 
-      //gets random number based off how many keys are in questionsObj
-      var randomNumber = Math.floor(Math.random() * questionsObjKeys.length);
-
-      //selects a random key (question) from questionsObj based off the random number
-      this.randomQuestion = questionsObjKeys[randomNumber];
+      //selects a random key (question) from this.remainingQuestions based off the random number
+      this.randomQuestion = this.remainingQuestions[randomNumber];
 
       //sets all choices for the current question as an array of objects
       this.questionChoices = questionsObj[this.randomQuestion];
+
+      //removes the current question from this.remainingQuestions array
+      this.remainingQuestions.splice(randomNumber, 1);
     },
 
-    //Starts the game. displays our choices. Also used to restart the game.
+    //Starts and restarts the game. displays our choices.
     start: function() {
       this.getQuestionChoices();
+      
+      //starts our timer for the round
+      this.startTimer();
 
       //allows the click event to run at the start of a new round.
       canClick = true;
@@ -108,11 +128,8 @@ window.onload = function() {
       $('.game__h3').text(this.randomQuestion);
 
       //Used to reset the time on each new round
-      this.time = 5;
+      this.time = 1;
       $('.game__h5').text(`Time Remaining: ${this.time}`);
-
-      //starts our timer for the round
-      this.startTimer();
 
       //displays choices to the screen
       for (i = 0; i < 4; i++) {
@@ -120,20 +137,19 @@ window.onload = function() {
         //each choice is an object. the key is an option to guess, the value is true or false.
         var choiceObj = this.questionChoices[i];
         
-        //the key of choiceObj, which is a potential answer. It is stored as an array.
-        var choice = Object.keys(choiceObj);
+        //the key of choiceObj, which is a potential answer. It is stored as an array with one value, but we get that string value from the array
+        var choice = Object.keys(choiceObj)[0];
 
         //gets the true or false value of each key from choiceObj
         var potentialAnswer = choiceObj[choice];
 
         //If potential answer is true, then the choice variable is correct. Stores choice in this.correctChoice
-        if (potentialAnswer) { this.correctChoice = choice[0]; }
+        if (potentialAnswer) { this.correctChoice = choice; }
 
         //adds choices to the screen
         var children = $('.game-content').children();
         $(children[i]).text(choice);
-      }
-      
+      }  
     },
 
     //subtracts from our total time and updates .game__h5 with the time
@@ -145,13 +161,29 @@ window.onload = function() {
         $('.game__h5').text(`Time Remaining: ${gameObj.time}`);
       }
 
-      //if time is out, then a new game begins automatically and clears our interval
+      //clears interval if time is out 
       else {
         clearInterval(interval);
-        this.start();
         losses++;
-        $('.game-score-tracker__div2--style .badge').text(`${losses}`);
+
+        //if no more questions remain, then the game is over. Brings back all questions and resets score
+        if (this.remainingQuestions.length === 0) {
+          //calls the modal pop up
+          this.modalPopUp();
+
+        //if questions remain, then a new question is given automatically
+        } else {
+          this.start();
+          $('.game-score-tracker__div2--style .badge').text(`${losses}`);
+        }
       }
+    },
+
+    //pops up modal to show the final score
+    modalPopUp: function () {
+      //brings back all remaining questions.
+      this.getRemainingQuestions();
+      $('#new-game-modal').modal('show');
     },
 
     //gets invoked in this.start to begin the timer.
@@ -160,6 +192,7 @@ window.onload = function() {
     }
   };
   
+  gameObj.getRemainingQuestions();
   gameObj.start();
 
   //checks if your guess was correct
@@ -172,16 +205,23 @@ window.onload = function() {
       //clears the current interval for the round.
       clearInterval(interval);
 
-      //starts a new round after 2 seconds
-      setTimeout(gameObj.start.bind(gameObj), 2000);
+      //if the gameObj.remainingQuestions array has 0 item, then its the last round of the game.
+      if (gameObj.remainingQuestions.length > 0) {
+        
+        //tracks your wins and losses
+        if ($(this).text() === gameObj.correctChoice) {
+          wins++;
+          $('.game-score-tracker__div1--style .badge').text(`${wins}`);
+        } else {
+          losses++;
+          $('.game-score-tracker__div2--style .badge').text(`${losses}`);
+        }
 
-      //tracks your wins and losses
-      if ($(this).text() === gameObj.correctChoice) {
-        wins++;
-        $('.game-score-tracker__div1--style .badge').text(`${wins}`);
+        //starts a new round after 2 seconds
+        setTimeout(gameObj.start.bind(gameObj), 2000);
       } else {
-        losses++;
-        $('.game-score-tracker__div2--style .badge').text(`${losses}`);
+        //calls the modal pop up
+        gameObj.modalPopUp() ;    
       }
     }
   });
