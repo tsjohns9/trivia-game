@@ -68,19 +68,9 @@ window.onload = function() {
 
   //used to store and clear our interval for each round
   var interval;
-  var wins = 0;
-  var losses = 0;
-
-  //hides our modal on click and starts new game
-  $('.close').click(function() {
-    wins = 0;
-    losses = 0;
-    gameObj.start();
-    $('#new-game-modal').modal('hide');
-    $('.game-score-tracker__div1--style .badge').text(`${wins}`);
-    $('.game-score-tracker__div2--style .badge').text(`${losses}`);
-  })
-  
+  var correct = 0;
+  var incorrect = 0;
+  var skipped = 0;
 
   var gameObj = {
     //gets set when getQuestionChoices is invoked
@@ -91,7 +81,6 @@ window.onload = function() {
     correctChoice: undefined,
     remainingQuestions: undefined,
     time: 1,
-    
 
     //gets all our questions from questionsObj by collecting all the keys as an array.
     getRemainingQuestions: function() {
@@ -114,10 +103,10 @@ window.onload = function() {
       this.remainingQuestions.splice(randomNumber, 1);
     },
 
-    //Starts and restarts the game. displays our choices.
+    //Starts a new round. displays our choices.
     start: function() {
       this.getQuestionChoices();
-      
+
       //starts our timer for the round
       this.startTimer();
 
@@ -164,26 +153,20 @@ window.onload = function() {
       //clears interval if time is out 
       else {
         clearInterval(interval);
-        losses++;
+        skipped++;
+        $('.game-score-tracker__div3--style .badge').text(`${skipped}`);
 
         //if no more questions remain, then the game is over. Brings back all questions and resets score
         if (this.remainingQuestions.length === 0) {
-          //calls the modal pop up
-          this.modalPopUp();
+          //displays new game button
+          $('#new-game-btn').fadeIn();
+          $('#new-game-btn').addClass('d-block');
 
         //if questions remain, then a new question is given automatically
         } else {
           this.start();
-          $('.game-score-tracker__div2--style .badge').text(`${losses}`);
         }
       }
-    },
-
-    //pops up modal to show the final score
-    modalPopUp: function () {
-      //brings back all remaining questions.
-      this.getRemainingQuestions();
-      $('#new-game-modal').modal('show');
     },
 
     //gets invoked in this.start to begin the timer.
@@ -192,6 +175,7 @@ window.onload = function() {
     }
   };
   
+  //these 2 methods start our game
   gameObj.getRemainingQuestions();
   gameObj.start();
 
@@ -205,25 +189,53 @@ window.onload = function() {
       //clears the current interval for the round.
       clearInterval(interval);
 
-      //if the gameObj.remainingQuestions array has 0 item, then its the last round of the game.
+      //tracks your correct and incorrect guesses
+      if ($(this).text() === gameObj.correctChoice) {
+        correct++;
+        $('.game-score-tracker__div1--style .badge').text(`${correct}`);
+      } else {
+        incorrect++;
+        $('.game-score-tracker__div2--style .badge').text(`${incorrect}`);
+      }
+
+      //if the gameObj.remainingQuestions array has 0 items, then its the last round of the game.
       if (gameObj.remainingQuestions.length > 0) {
-        
-        //tracks your wins and losses
-        if ($(this).text() === gameObj.correctChoice) {
-          wins++;
-          $('.game-score-tracker__div1--style .badge').text(`${wins}`);
-        } else {
-          losses++;
-          $('.game-score-tracker__div2--style .badge').text(`${losses}`);
-        }
 
         //starts a new round after 2 seconds
         setTimeout(gameObj.start.bind(gameObj), 2000);
       } else {
-        //calls the modal pop up
-        gameObj.modalPopUp() ;    
+
+        //fades in new game button
+        $('#new-game-btn').fadeIn();
+        $('#new-game-btn').addClass('d-block');
       }
     }
   });
+
+  //starts a new game
+  $('#new-game-btn').click(function () {
+
+    //resets scores
+    wins = 0;
+    losses = 0;
+    skipped = 0;
+
+    //These 2 methods used together start a new game
+    gameObj.getRemainingQuestions();
+    gameObj.start();
+
+    //fades our button out
+    $('#new-game-btn').fadeOut();
+
+    //used to remove d-block class once fade is finished
+    setTimeout(function() {
+      $('#new-game-btn').removeClass('d-block')
+    }, 400);
+
+    //resets score display
+    $('.game-score-tracker__div1--style .badge').text(`${wins}`);
+    $('.game-score-tracker__div2--style .badge').text(`${losses}`);
+    $('.game-score-tracker__div3--style .badge').text(`${skipped}`);
+  })
 
 };

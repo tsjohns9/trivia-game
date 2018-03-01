@@ -23,43 +23,25 @@
 
     <h5 class="game__h5 text-center mb-4">Time Remaining: 1</h5>
 
-    <section class="game-score-tracker row text-center">
-      <div class="col-sm-6 game-score-tracker__div1--style">
-        <p class="bg-info mx-auto p-2 rounded text-white w-50">Wins <span class="badge badge-light">0</span></p>   
+    <section class="game-score-tracker mb-4 row text-center">
+      <div class="col-sm-4 game-score-tracker__div1--style">
+        <p class="bg-info mx-auto p-2 rounded text-white w-50">Correct <span class="badge badge-light">0</span></p>   
       </div>
-      <div class="col-sm-6 game-score-tracker__div2--style">
-        <p class="bg-info mx-auto p-2 rounded text-white w-50">Losses <span class="badge badge-light">0</span></p>         
+      <div class="col-sm-4 game-score-tracker__div2--style">
+        <p class="bg-info mx-auto p-2 rounded text-white w-50">Incorrect <span class="badge badge-light">0</span></p>         
       </div>
-
-      <!-- <p class="col-sm-6 game-score-tracker__p1">Wins: 0</p>
-      <p class="col-sm-6 game-score-tracker__p2">Losses: 0</p> -->
+      <div class="col-sm-4 game-score-tracker__div3--style">
+        <p class="bg-info mx-auto p-2 rounded text-white w-50">Skipped
+          <span class="badge badge-light">0</span>
+        </p>
+      </div>
     </section>
+    
+    <button type="button" class="btn btn-dark btn-lg w-25 mx-auto" id="new-game-btn">New Game</button>
+    
   </main>
 
-
-  <!-- Modal -->
-<div class="modal fade" id="new-game-modal" tabindex="-1" role="dialog" aria-labelledby="new-game-modal-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="./src/script.js" type="text/javascript"></script>
