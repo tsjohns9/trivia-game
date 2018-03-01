@@ -1,14 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
 .game-content__div--style {
   cursor: pointer;
 }
 
-.game-score-tracker__div1--style,
-.game-score-tracker__div2--style,
-.game-score-tracker__div3--style{
+.game-content__div--style:hover {
+  border: 1px solid #17a2b8;
+  border-radius: 4px;
+}
+
+.game-score-tracker__div {
   font-size: 20px;
   letter-spacing: 1px;
 }
 
 #new-game-btn {
   display: none;
+  width: 100%;
+}
+
+.game__h3--style {
+  font-size: 18px;
+}
+
+/* media queries */
+
+@media(min-width: 576px) {
+  .game__h3--style {
+    font-size: 22px;
+    width: 50%;
+  }
 }

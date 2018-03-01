@@ -1,66 +1,66 @@
 window.onload = function() {
 
   var questionsObj = {
-    "question0": [
-      {q0c1: true},
-      {q0c2: false},
-      {q0c3: false},
-      {q0c4: false}
-    ],
-    question1: [
-      {q1c1: true},
-      {q1c2: false},
-      {q1c3: false},
-      {q1c4: false}
-    ],
-    question2: [
-      {q2c1: true},
-      {q2c2: false},
-      {q2c3: false},
-      {q2c4: false}
-    ],
-    question3: [
-      {q3c1: true},
-      {q3c2: false},
-      {q3c3: false},
-      {q3c4: false}
-    ],
-    question4: [
-      {q4c1: true},
-      {q4c2: false},
-      {q4c3: false},
-      {q4c4: false}
-    ],
-    question5: [
-      {q5c1: true},
-      {q5c2: false},
-      {q5c3: false},
-      {q5c4: false}
-    ],
-    question6: [
-      {q6c1: true},
-      {q6c2: false},
-      {q6c3: false},
-      {q6c4: false}
-    ],
-    question7: [
-      {q7c1: true},
-      {q7c2: false},
-      {q7c3: false},
-      {q7c4: false}
-    ],
-    question8: [
-      {q8c1: true},
-      {q8c2: false},
-      {q8c3: false},
-      {q8c4: false}
-    ],
+    // "question0": [
+    //   {q0c1: true},
+    //   {q0c2: false},
+    //   {q0c3: false},
+    //   {q0c4: false}
+    // ],
+    // question1: [
+    //   {q1c1: true},
+    //   {q1c2: false},
+    //   {q1c3: false},
+    //   {q1c4: false}
+    // ],
+    // question2: [
+    //   {q2c1: true},
+    //   {q2c2: false},
+    //   {q2c3: false},
+    //   {q2c4: false}
+    // ],
+    // question3: [
+    //   {q3c1: true},
+    //   {q3c2: false},
+    //   {q3c3: false},
+    //   {q3c4: false}
+    // ],
+    // question4: [
+    //   {q4c1: true},
+    //   {q4c2: false},
+    //   {q4c3: false},
+    //   {q4c4: false}
+    // ],
+    // question5: [
+    //   {q5c1: true},
+    //   {q5c2: false},
+    //   {q5c3: false},
+    //   {q5c4: false}
+    // ],
+    // question6: [
+    //   {q6c1: true},
+    //   {q6c2: false},
+    //   {q6c3: false},
+    //   {q6c4: false}
+    // ],
+    // question7: [
+    //   {q7c1: true},
+    //   {q7c2: false},
+    //   {q7c3: false},
+    //   {q7c4: false}
+    // ],
+    // question8: [
+    //   {q8c1: true},
+    //   {q8c2: false},
+    //   {q8c3: false},
+    //   {q8c4: false}
+    // ],
     question9: [
       {q9c1: true},
       {q9c2: false},
       {q9c3: false},
       {q9c4: false}
-    ],
+    ]
   };
 
   //allows/prevents the click event from being used
@@ -114,7 +114,7 @@ window.onload = function() {
       canClick = true;
 
       //updates .game-content__h3 with the question
-      $('.game__h3').text(this.randomQuestion);
+      $('.game__h3--style').text(this.randomQuestion);
 
       //Used to reset the time on each new round
       this.time = 1;
@@ -160,7 +160,6 @@ window.onload = function() {
         if (this.remainingQuestions.length === 0) {
           //displays new game button
           $('#new-game-btn').fadeIn();
-          $('#new-game-btn').addClass('d-block');
 
         //if questions remain, then a new question is given automatically
         } else {
@@ -207,7 +206,6 @@ window.onload = function() {
 
         //fades in new game button
         $('#new-game-btn').fadeIn();
-        $('#new-game-btn').addClass('d-block');
       }
     }
   });
@@ -216,8 +214,8 @@ window.onload = function() {
   $('#new-game-btn').click(function () {
 
     //resets scores
-    wins = 0;
-    losses = 0;
+    correct = 0;
+    incorrect = 0;
     skipped = 0;
 
     //These 2 methods used together start a new game
@@ -227,14 +225,9 @@ window.onload = function() {
     //fades our button out
     $('#new-game-btn').fadeOut();
 
-    //used to remove d-block class once fade is finished
-    setTimeout(function() {
-      $('#new-game-btn').removeClass('d-block')
-    }, 400);
-
     //resets score display
-    $('.game-score-tracker__div1--style .badge').text(`${wins}`);
-    $('.game-score-tracker__div2--style .badge').text(`${losses}`);
+    $('.game-score-tracker__div1--style .badge').text(`${correct}`);
+    $('.game-score-tracker__div2--style .badge').text(`${incorrect}`);
     $('.game-score-tracker__div3--style .badge').text(`${skipped}`);
   })
 
