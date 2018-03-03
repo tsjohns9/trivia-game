@@ -56,12 +56,15 @@ window.onload = function() {
     //   {q8c4: false}
     // ],
     question9: [
-      {q9c1: true},
-      {q9c2: false},
-      {q9c3: false},
-      {q9c4: false}
+      { q9c1: true },
+      { q9c2: false },
+      { q9c3: false },
+      { q9c4: false }
     ]
   };
+
+  //starts the main content hidden. will be revealed when start game is pressed
+  $('.game').toggle();
 
   //allows/prevents the click event from being used
   var canClick = true;
@@ -128,17 +131,20 @@ window.onload = function() {
         
         //the key of choiceObj, which is a potential answer. It is stored as an array with one value, but we get that string value from the array
         var choice = Object.keys(choiceObj)[0];
-
+        
         //gets the true or false value of each key from choiceObj
         var potentialAnswer = choiceObj[choice];
-
+        
         //If potential answer is true, then the choice variable is correct. Stores choice in this.correctChoice
         if (potentialAnswer) { this.correctChoice = choice; }
 
         //adds choices to the screen
         var children = $('.game-content').children();
         $(children[i]).text(choice);
-      }  
+      }
+      // console.log(choiceObj)
+      // console.log(choice)
+      // console.log(potentialAnswer)
     },
 
     //subtracts from our total time and updates .game__h5 with the time
@@ -158,8 +164,9 @@ window.onload = function() {
 
         //if no more questions remain, then the game is over. Brings back all questions and resets score
         if (this.remainingQuestions.length === 0) {
+          canClick = false
           //displays new game button
-          $('#new-game-btn').fadeIn();
+          $('.btn').fadeIn();
 
         //if questions remain, then a new question is given automatically
         } else {
@@ -174,9 +181,9 @@ window.onload = function() {
     }
   };
   
-  //these 2 methods start our game
-  gameObj.getRemainingQuestions();
-  gameObj.start();
+  // these 2 methods start our game
+  // gameObj.getRemainingQuestions();
+  // gameObj.start();
 
   //checks if your guess was correct
   $('.game-content__div--style').click(function() {
@@ -205,15 +212,30 @@ window.onload = function() {
       } else {
 
         //fades in new game button
-        $('#new-game-btn').fadeIn();
+        $('.btn').fadeIn();
       }
     }
   });
 
-  //starts a new game
-  $('#new-game-btn').click(function () {
+  // starts the first game
+  $('.start-game-btn').click(function() {
+
+    //reveals main content
+    $('.game').toggle();
+
+    //removes button
+    $(this).remove();
+
+    //These 2 functions start the game
+    gameObj.getRemainingQuestions();
+    gameObj.start();
+  });
+
+  //starts a new game after a game is finished
+  $('.btn--width').click(function () {
 
     //resets scores
+    canClick = true;
     correct = 0;
     incorrect = 0;
     skipped = 0;
@@ -223,7 +245,7 @@ window.onload = function() {
     gameObj.start();
 
     //fades our button out
-    $('#new-game-btn').fadeOut();
+    $('.btn').fadeOut();
 
     //resets score display
     $('.game-score-tracker__div1--style .badge').text(`${correct}`);

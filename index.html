@@ -10,8 +10,11 @@
 </head>
 <body>
 
+  <!-- <div class="wrapper-to-center-content"> -->
+
+  <h1 class="my-4 text-center">Trivia</h1>
   <main class="game container">
-    <h1 class="mb-4 text-center">JavaScript Trivia!</h1>
+    <!-- <h1 class="mb-4 text-center">Trivia</h1> -->
     <h3 class="alert alert-info game__h3--style text-center mb-4 mx-sm-auto" role="alert"></h3>
 
     <section class="game-content row text-center mb-4">
@@ -21,28 +24,29 @@
       <div class="col-sm-3 game-content__div--style mb-sm-0 p-2"></div>
     </section>
 
-    <h5 class="game__h5 text-center mb-4">Time Remaining: 1</h5>
+    <h5 class="game__h5 mb-4 text-center">Time Remaining: 1</h5>
 
     <section class="game-score-tracker row text-center">
-      <div class="col-sm-4 game-score-tracker__div game-score-tracker__div1--style">
+      <div class="col-sm-4 game-score-tracker__div1--style">
         <p class="bg-info mx-sm-auto p-2 rounded text-white">Correct <span class="badge badge-light">0</span></p>   
       </div>
-      <div class="col-sm-4 game-score-tracker__div game-score-tracker__div2--style">
+      <div class="col-sm-4 game-score-tracker__div2--style">
         <p class="bg-info mx-sm-auto p-2 rounded text-white">Incorrect <span class="badge badge-light">0</span></p>         
       </div>
-      <div class="col-sm-4 game-score-tracker__div game-score-tracker__div3--style">
-        <p class="bg-info mx-sm-auto p-2 rounded text-white">Skipped
-          <span class="badge badge-light">0</span>
-        </p>
+      <div class="col-sm-4 game-score-tracker__div3--style">
+        <p class="bg-info mx-sm-auto p-2 rounded text-white">Skipped <span class="badge badge-light">0</span></p>
       </div>
-      <div class="col-sm-4 offset-sm-4 mt-sm-4">
-        <button type="button" class="btn btn-dark btn-lg btn--width mx-sm-auto " id="new-game-btn">New Game</button>
+      <div class="col-sm-4 mt-sm-4 offset-sm-4">
+        <button type="button" class="btn btn-dark btn-lg btn--width mx-sm-auto ">New Game</button>
       </div>
     </section>
-    
-    
-    
   </main>
+
+  <div class="start-game-btn text-center">
+    <button type="button" class="btn btn-lg btn-secondary start-game-btn--position">Start Game</button>
+  </div>
+
+  <!-- </div> -->
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

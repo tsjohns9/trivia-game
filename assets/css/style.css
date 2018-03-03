@@ -2,21 +2,29 @@
   box-sizing: border-box;
 }
 
+/* .game {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
 .game-content__div--style {
-  cursor: pointer;
+  border: 1px solid #fff;
 }
 
 .game-content__div--style:hover {
   border: 1px solid #17a2b8;
   border-radius: 4px;
+  cursor: pointer;
 }
 
-.game-score-tracker__div {
+.game-score-tracker {
   font-size: 20px;
   letter-spacing: 1px;
 }
 
-#new-game-btn {
+.btn--width {
   display: none;
   width: 100%;
 }
@@ -25,11 +33,24 @@
   font-size: 18px;
 }
 
+/* .wrapper-to-center-content {
+  position: relative;
+} */
+
+.start-game-btn {
+  margin-top: 200px;
+}
+
 /* media queries */
 
 @media(min-width: 576px) {
   .game__h3--style {
     font-size: 22px;
     width: 50%;
+  }
+
+  .col-sm-4 p,
+  .btn--width {
+    width: 90%;
   }
 }
