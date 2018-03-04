@@ -93,7 +93,7 @@ window.onload = function() {
     remainingPokemon: undefined,
 
     //time used for each round
-    time: 1,
+    time: 5,
 
     //gets all the pokemon from pokemonObj by collecting all the keys as an array. Called at the start of each game.
     getRemainingPokemon: function() {
@@ -115,8 +115,30 @@ window.onload = function() {
       //removes the current question from this.remainingPokemon array
       this.remainingPokemon.splice(randomNumber, 1);
 
-      //gets an array of the pokemon we can choose from
-      this.pokemonChoicesArr = Object.keys(this.pokemonChoicesObj);
+      //gets an array of the pokemon we can choose from, from this.pokemonChoicesObj. Passes that array to this.randomizeChoices to display each choice in a random order
+      this.pokemonChoicesArr = this.randomizeChoices(Object.keys(this.pokemonChoicesObj));
+    },
+
+    //this.pokemonChoicesArr will be passed into this function in order to randomly display the choices
+    randomizeChoices: function(arr) {
+      var newArr = [];
+
+      //a while loop is needed here since arr.length is changing on each loop due to the splice method      
+      while (arr.length > 0) {
+
+        //generates a random number to pull a value from arr.
+        var randomNumber = Math.floor(Math.random() * arr.length);
+        var current = arr[randomNumber];
+
+        //removes the random pokemon from the passed in array
+        arr.splice(randomNumber, 1);
+
+        //pushes the random value into the new array.
+        newArr.push(current);
+      }
+
+      //final result is a new array with its values in a random order
+      return newArr;
     },
 
     //Starts a new round. displays our choices.
@@ -133,7 +155,7 @@ window.onload = function() {
       $('.pokemon-container__image').attr('src', this.randomPokemon);
 
       //Used to reset the time on each new round
-      this.time = 1;
+      this.time = 5;
       $('.game__h5').text(`Time Remaining: ${this.time}`);
 
       //displays choices to the screen

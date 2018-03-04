@@ -2,21 +2,16 @@
   box-sizing: border-box;
 }
 
-/* .game {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
-
 .game-content__div--style {
   border: 1px solid #fff;
+  transition: .2s;
 }
 
 .game-content__div--style:hover {
   border: 1px solid #17a2b8;
   border-radius: 4px;
   cursor: pointer;
+  transition: .2s;
 }
 
 .game-score-tracker {
@@ -33,10 +28,6 @@
   font-size: 18px;
 }
 
-/* .wrapper-to-center-content {
-  position: relative;
-} */
-
 .start-game-btn {
   margin-top: 200px;
 }
@@ -44,6 +35,16 @@
 .pokemon-container__image {
   width: 200px;
   height: 200px;
+}
+
+.timer {
+  width: 200px;
+  height: 200px;
+}
+
+.timer__p--position {
+  text-align: center;
+  line-height: 200px;
 }
 
 /* media queries */
