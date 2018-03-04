@@ -151,12 +151,15 @@ window.onload = function() {
       //allows the click event to run at the start of a new round.
       canClick = true;
 
+      //countdown bg color starts at 100%
+      $('.timer--background-fill').css('height', '100%');
+
       //updates .pokemon-container__image with the pokemon image
       $('.pokemon-container__image').attr('src', this.randomPokemon);
 
       //Used to reset the time on each new round
       this.time = 5;
-      $('.game__h5').text(`Time Remaining: ${this.time}`);
+      $('.timer__p--position').text(`${this.time}`);
 
       //displays choices to the screen
       for (i = 0; i < this.pokemonChoicesArr.length; i++) {
@@ -177,13 +180,13 @@ window.onload = function() {
 
     },
 
-    //subtracts from our total time and updates .game__h5 with the time
+    //subtracts from our total time and updates timer__p--position with the time
     decrement: function() {
 
       //only updates if greater than 0
       if (this.time > 0) {
         this.time--;
-        $('.game__h5').text(`Time Remaining: ${gameObj.time}`);
+        $('.timer__p--position').text(`${gameObj.time}`);
       }
 
       //clears interval if time is out 
@@ -203,6 +206,11 @@ window.onload = function() {
           this.start();
         }
       }
+
+      //determines the percent of time used for the round. This is used for the changing height of the bg color on the timer
+      var timeLeft = (this.time / 5) * 100;
+      timeLeft += '%';
+      $('.timer--background-fill').css('height', timeLeft);
     },
 
     //gets invoked in this.start to begin the timer.
