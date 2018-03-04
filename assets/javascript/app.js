@@ -1,61 +1,61 @@
 window.onload = function() {
 
   var pokemonObj = {
-    'https://img.pokemondb.net/artwork/bulbasaur.jpg': {
+    './assets/images/bulbasaur.jpg': {
       Bulbasaur: true,
       Ivysaur: false,
       Venusaur: false,
       Raichu: false
     },
-    'https://img.pokemondb.net/artwork/charizard.jpg': {
+    './assets/images/charizard.jpg': {
       Charizard: true,
       Nidoking: false,
       Charmander: false,
       Vulpix: false
     },
-    'https://img.pokemondb.net/artwork/gengar.jpg': {
+    './assets/images/gengar.jpg': {
       Gengar: true,
       Haunter: false,
       Jynx: false,      
       Geodude: false
     },
-    'https://img.pokemondb.net/artwork/feraligatr.jpg': {
+    './assets/images/feraligatr.jpg': {
       Feraligatr: true,
       Ekans: false,
       Blastois: false,
       Golem: false
     },
-    'https://img.pokemondb.net/artwork/sudowoodo.jpg': {
+    './assets/images/sudowoodo.jpg': {
       Sudowoodo: true,
       Koffing: false,
       Cubone: false,
       Tauros: false
     },
-    'https://img.pokemondb.net/artwork/magikarp.jpg': {
+    './assets/images/magikarp.jpg': {
       Magikarp: true,
       Gyarados: false,
       Lapras: false,
       Eevee: false
     },
-    'https://img.pokemondb.net/artwork/metagross.jpg': {
+    './assets/images/metagross.jpg': {
       Metagross: true,
       Omastar: false,
       Omanyte: false,
       Kabuto: false
     },
-    'https://img.pokemondb.net/artwork/entei.jpg': {
+    './assets/images/entei.jpg': {
       Entei: true,
       Suicune: false,
       Moltres: false,
       Flareon: false
     },
-    'https://img.pokemondb.net/artwork/blaziken.jpg': {
+    './assets/images/blaziken.jpg': {
       Blaziken: true,
       Numel: false,
       Salamence: false,
       Zigzagoon: false
     },
-    'https://img.pokemondb.net/artwork/kyogre.jpg': {
+    './assets/images/kyogre.jpg': {
       Kyogre: true,
       Groudon: false,
       Rayquaza: false,
@@ -233,9 +233,11 @@ window.onload = function() {
       if ($(this).text() === gameObj.correctChoice) {
         correct++;
         $('.game-score-tracker__div1--style .badge').text(`${correct}`);
+        $('.timer__p--position').text('Correct!');
       } else {
         incorrect++;
         $('.game-score-tracker__div2--style .badge').text(`${incorrect}`);
+        $('.timer__p--position').text('Incorrect!');
       }
 
       //if the gameObj.remainingPokemon array has 0 items, then its the last round of the game.

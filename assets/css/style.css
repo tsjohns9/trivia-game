@@ -5,6 +5,7 @@
 .game-content__div--style {
   border: 1px solid #fff;
   transition: .2s;
+  font-size: 20px;
 }
 
 .game-content__div--style:hover {
@@ -24,10 +25,6 @@
   width: 100%;
 }
 
-.game__h3--style {
-  font-size: 18px;
-}
-
 .start-game-btn {
   margin-top: 200px;
 }
@@ -36,6 +33,8 @@
   width: 200px;
   height: 200px;
 }
+
+/* timer */
 
 .timer {
   border: 2px solid #17a2b8;
