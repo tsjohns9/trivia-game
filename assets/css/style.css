@@ -41,6 +41,11 @@
   margin-top: 200px;
 }
 
+.pokemon-container__image {
+  width: 200px;
+  height: 200px;
+}
+
 /* media queries */
 
 @media(min-width: 576px) {

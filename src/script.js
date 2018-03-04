@@ -1,65 +1,65 @@
 window.onload = function() {
 
   var questionsObj = {
-    // "question0": [
-    //   {q0c1: true},
-    //   {q0c2: false},
-    //   {q0c3: false},
-    //   {q0c4: false}
-    // ],
-    // question1: [
-    //   {q1c1: true},
-    //   {q1c2: false},
-    //   {q1c3: false},
-    //   {q1c4: false}
-    // ],
-    // question2: [
-    //   {q2c1: true},
-    //   {q2c2: false},
-    //   {q2c3: false},
-    //   {q2c4: false}
-    // ],
-    // question3: [
-    //   {q3c1: true},
-    //   {q3c2: false},
-    //   {q3c3: false},
-    //   {q3c4: false}
-    // ],
-    // question4: [
-    //   {q4c1: true},
-    //   {q4c2: false},
-    //   {q4c3: false},
-    //   {q4c4: false}
-    // ],
-    // question5: [
-    //   {q5c1: true},
-    //   {q5c2: false},
-    //   {q5c3: false},
-    //   {q5c4: false}
-    // ],
-    // question6: [
-    //   {q6c1: true},
-    //   {q6c2: false},
-    //   {q6c3: false},
-    //   {q6c4: false}
-    // ],
-    // question7: [
-    //   {q7c1: true},
-    //   {q7c2: false},
-    //   {q7c3: false},
-    //   {q7c4: false}
-    // ],
-    // question8: [
-    //   {q8c1: true},
-    //   {q8c2: false},
-    //   {q8c3: false},
-    //   {q8c4: false}
-    // ],
-    question9: [
-      { q9c1: true },
-      { q9c2: false },
-      { q9c3: false },
-      { q9c4: false }
+    'https://img.pokemondb.net/artwork/bulbasaur.jpg': [
+      {Bulbasaur: true},
+      {Ivysaur: false},
+      {Venusaur: false},
+      {Raichu: false}
+    ],
+    'https://img.pokemondb.net/artwork/charizard.jpg': [
+      {Charizard: true},
+      {Nidoking: false},
+      {Charmander: false},
+      {Vulpix: false}
+    ],
+    'https://img.pokemondb.net/artwork/gengar.jpg': [
+      {Gengar: true},
+      {Haunter: false},
+      {Jynx: false},
+      {Geodude: false}
+    ],
+    'https://img.pokemondb.net/artwork/feraligatr.jpg': [
+      {Feraligatr: true},
+      {Ekans: false},
+      {Blastoise: false},
+      {Golem: false}
+    ],
+    'https://img.pokemondb.net/artwork/sudowoodo.jpg': [
+      {Sudowoodo: true},
+      {Koffing: false},
+      {Cubone: false},
+      {Tauros: false}
+    ],
+    'https://img.pokemondb.net/artwork/magikarp.jpg': [
+      {Magikarp: true},
+      {Gyarados: false},
+      {Lapras: false},
+      {Eevee: false}
+    ],
+    'https://img.pokemondb.net/artwork/metagross.jpg': [
+      {Metagross: true},
+      {Omastar: false},
+      {Omanyte: false},
+      {Kabuto: false}
+    ],
+    'https://img.pokemondb.net/artwork/entei.jpg': [
+      {Entei: true},
+      {Suicune: false},
+      {Moltres: false},
+      {Flareon: false}
+    ],
+    'https://img.pokemondb.net/artwork/blaziken.jpg': [
+      {Blaziken: true},
+      {Numel: false},
+      {Salamence: false},
+      {Zigzagoon: false}
+    ],
+    'https://img.pokemondb.net/artwork/kyogre.jpg': [
+      {Kyogre: true},
+      {Groudon: false},
+      {Rayquaza: false},
+      {Deoxys: false}
     ]
   };
 
@@ -117,7 +117,7 @@ window.onload = function() {
       canClick = true;
 
       //updates .game-content__h3 with the question
-      $('.game__h3--style').text(this.randomQuestion);
+      $('.pokemon-container__image').attr('src', this.randomQuestion);
 
       //Used to reset the time on each new round
       this.time = 1;
