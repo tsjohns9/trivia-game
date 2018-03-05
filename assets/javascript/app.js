@@ -62,8 +62,6 @@ window.onload = function() {
       Deoxys: false
     }
   };
-  //starts the main content hidden. will be revealed when start game is pressed
-  $('.game').toggle();
 
   //allows/prevents the click event from being used
   var canClick = true;
@@ -100,7 +98,7 @@ window.onload = function() {
       this.remainingPokemon = Object.keys(pokemonObj);
     },
 
-    //gets our random pokemon, and its choices
+    //gets the random pokemon, and its choices
     getPokemonChoices: function() {
 
       //gets random number based off how many keys are in this.remainingPokemon
@@ -141,11 +139,11 @@ window.onload = function() {
       return newArr;
     },
 
-    //Starts a new round. displays our choices.
+    //Starts a new round. displays the choices.
     start: function() {
       this.getPokemonChoices();
 
-      //starts our timer for the round
+      //starts the timer for the round
       this.startTimer();
 
       //allows the click event to run at the start of a new round.
@@ -180,7 +178,7 @@ window.onload = function() {
 
     },
 
-    //subtracts from our total time and updates timer__p--position with the time
+    //subtracts from the total time and updates timer__p--position with the time
     decrement: function() {
 
       //only updates if greater than 0
@@ -199,7 +197,7 @@ window.onload = function() {
         if (this.remainingPokemon.length === 0) {
           canClick = false
           //displays new game button
-          $('.btn').fadeIn();
+          $('.btn--width').fadeIn();
 
         //if questions remain, then a new question is given automatically
         } else {
@@ -219,7 +217,7 @@ window.onload = function() {
     }
   };
 
-  //checks if your guess was correct
+  //checks if the guess was correct
   $('.game-content__div--style').click(function() {
 
     //prevents the click event from running when the setTimeout function gets called to start a new round.
@@ -229,7 +227,10 @@ window.onload = function() {
       //clears the current interval for the round.
       clearInterval(interval);
 
-      //tracks your correct and incorrect guesses
+      //clears the timer bg color
+      $('.timer--background-fill').css('height', '0');
+
+      //tracks the correct and incorrect guesses
       if ($(this).text() === gameObj.correctChoice) {
         correct++;
         $('.game-score-tracker__div1--style .badge').text(`${correct}`);
@@ -248,7 +249,7 @@ window.onload = function() {
       } else {
 
         //fades in new game button
-        $('.btn').fadeIn();
+        $('.btn--width').fadeIn();
       }
     }
   });
@@ -257,7 +258,7 @@ window.onload = function() {
   $('.start-game-btn').click(function() {
 
     //reveals main content
-    $('.game').toggle();
+    $('.game').fadeIn();
 
     //removes button
     $(this).remove();
@@ -280,8 +281,8 @@ window.onload = function() {
     gameObj.getRemainingPokemon();
     gameObj.start();
 
-    //fades our button out
-    $('.btn').fadeOut();
+    //fades button out
+    $('.btn--width').fadeOut();
 
     //resets score display
     $('.game-score-tracker__div1--style .badge').text(`${correct}`);

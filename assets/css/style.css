@@ -1,5 +1,9 @@
-* {
+*,h1 {
   box-sizing: border-box;
+}
+
+.game {
+  display: none;
 }
 
 .game-content__div--style {
