@@ -87,7 +87,7 @@ window.onload = function() {
     //will store the correct pokemon
     correctChoice: undefined,
 
-    //will be the remaining pokemon URL links. After a round, that pokemon is removed from this array
+    //will be the remaining pokemon file paths. After a round, that pokemon is removed from this array
     remainingPokemon: undefined,
 
     //time used for each round
@@ -104,7 +104,7 @@ window.onload = function() {
       //gets random number based off how many keys are in this.remainingPokemon
       var randomNumber = Math.floor(Math.random() * this.remainingPokemon.length);
 
-      //selects a random key (pokemon URL) from this.remainingPokemon based off the random number
+      //selects a random key (pokemon image) from this.remainingPokemon based off the random number
       this.randomPokemon = this.remainingPokemon[randomNumber];
 
       //sets all choices for the current pokemon as an object
@@ -121,10 +121,10 @@ window.onload = function() {
     randomizeChoices: function(arr) {
       var newArr = [];
 
-      //a while loop is needed here since arr.length is changing on each loop due to the splice method      
+      //a while loop is needed since arr.length is changing on each loop due to the splice method      
       while (arr.length > 0) {
 
-        //generates a random number to pull a value from arr.
+        //generates a random number to pull a value from arr
         var randomNumber = Math.floor(Math.random() * arr.length);
         var current = arr[randomNumber];
 
